@@ -46,8 +46,8 @@ pointer-events: none;
 .header-script {
 font-family: ‘Pinyon Script’, cursive;
 color: #6b8c4f;
-font-size: 2.15rem;
-line-height: 1.45;
+font-size: 1.3rem;
+line-height: 1.5;
 text-align: center;
 margin-bottom: 28px;
 letter-spacing: 0.01em;
@@ -97,10 +97,11 @@ animation: fadeIn 0.8s ease both;
 .event-title {
 font-family: ‘Pinyon Script’, cursive;
 color: #6b8c4f;
-font-size: 1.75rem;
+font-size: 1.35rem;
 text-align: center;
 margin-bottom: 10px;
 letter-spacing: 0.01em;
+white-space: nowrap;
 }
 
 .rsvp-row {
@@ -280,7 +281,7 @@ animation: fadeIn 0.8s ease 0.2s both;
   <!-- Wedding Ceremony -->
 
   <div class="event-section">
-    <div class="event-title">The Wedding Ceremony and Reception</div>
+    <div class="event-title" style="font-size:1.05rem;white-space:nowrap;">The Wedding Ceremony and Reception</div>
     <div class="rsvp-row">
       <label>
         <input type="checkbox" id="wc-accepts" onchange="togglePersons('wc', 'accepts')">
