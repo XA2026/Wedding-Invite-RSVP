@@ -1,1 +1,407 @@
+<!DOCTYPE html>
 
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding RSVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Tangerine:wght@700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+min-height: 100vh;
+background: #f5f0e8;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Cormorant Garamond’, serif;
+padding: 24px;
+}
+
+.card {
+background: #fdfaf4;
+border: 1px solid #c8d5b4;
+max-width: 520px;
+width: 100%;
+padding: 52px 48px 44px;
+position: relative;
+box-shadow: 0 4px 40px rgba(100,120,70,0.08);
+animation: fadeIn 0.8s ease both;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+.card::before {
+content: ‘’;
+position: absolute;
+inset: 6px;
+border: 1px solid #d8e5c0;
+pointer-events: none;
+}
+
+.header-script {
+font-family: ‘Pinyon Script’, cursive;
+color: #6b8c4f;
+font-size: 2.15rem;
+line-height: 1.45;
+text-align: center;
+margin-bottom: 28px;
+letter-spacing: 0.01em;
+}
+
+.name-line {
+display: flex;
+align-items: center;
+gap: 0;
+margin-bottom: 32px;
+}
+
+.name-m {
+font-family: ‘Pinyon Script’, cursive;
+color: #6b8c4f;
+font-size: 2.8rem;
+line-height: 1;
+flex-shrink: 0;
+}
+
+.name-input {
+flex: 1;
+border: none;
+border-bottom: 1.5px solid #9ab87a;
+background: transparent;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.1rem;
+color: #3d4a2d;
+padding: 2px 6px 4px;
+outline: none;
+margin-left: 4px;
+transition: border-color 0.2s;
+}
+
+.name-input:focus { border-color: #6b8c4f; }
+.name-input::placeholder { color: #b0c498; font-style: italic; }
+
+.event-section {
+margin-bottom: 24px;
+animation: fadeIn 0.8s ease both;
+}
+
+.event-section:nth-child(3) { animation-delay: 0.1s; }
+.event-section:nth-child(4) { animation-delay: 0.2s; }
+.event-section:nth-child(5) { animation-delay: 0.3s; }
+
+.event-title {
+font-family: ‘Pinyon Script’, cursive;
+color: #6b8c4f;
+font-size: 1.75rem;
+text-align: center;
+margin-bottom: 10px;
+letter-spacing: 0.01em;
+}
+
+.rsvp-row {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 6px;
+}
+
+.rsvp-row label {
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+font-family: ‘EB Garamond’, serif;
+font-size: 0.78rem;
+letter-spacing: 0.13em;
+text-transform: uppercase;
+color: #4a5e35;
+user-select: none;
+}
+
+.custom-check {
+width: 16px;
+height: 16px;
+border: 1.5px solid #9ab87a;
+display: inline-block;
+flex-shrink: 0;
+transition: background 0.18s, border-color 0.18s;
+position: relative;
+cursor: pointer;
+}
+
+input[type=“checkbox”] { display: none; }
+
+input[type=“checkbox”]:checked + .custom-check {
+background: #6b8c4f;
+border-color: #6b8c4f;
+}
+
+input[type=“checkbox”]:checked + .custom-check::after {
+content: ‘✓’;
+position: absolute;
+color: #fdfaf4;
+font-size: 11px;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+line-height: 1;
+}
+
+.persons-input {
+width: 38px;
+border: none;
+border-bottom: 1.5px solid #9ab87a;
+background: transparent;
+text-align: center;
+font-family: ‘EB Garamond’, serif;
+font-size: 0.85rem;
+letter-spacing: 0.1em;
+color: #3d4a2d;
+outline: none;
+padding: 0 2px 2px;
+transition: border-color 0.2s;
+}
+.persons-input:focus { border-color: #6b8c4f; }
+
+.divider {
+border: none;
+border-top: 1px solid #d0deba;
+margin: 20px 0;
+}
+
+.accommodations-label {
+font-family: ‘EB Garamond’, serif;
+font-size: 0.78rem;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: #4a5e35;
+text-align: center;
+display: block;
+margin-bottom: 10px;
+}
+
+.accommodations-input {
+width: 100%;
+border: none;
+border-bottom: 1.5px solid #9ab87a;
+background: transparent;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1rem;
+color: #3d4a2d;
+padding: 4px 4px 6px;
+outline: none;
+transition: border-color 0.2s;
+}
+.accommodations-input:focus { border-color: #6b8c4f; }
+.accommodations-input::placeholder { color: #b0c498; font-style: italic; }
+
+.submit-btn {
+display: block;
+width: 100%;
+margin-top: 32px;
+padding: 13px;
+background: transparent;
+border: 1.5px solid #6b8c4f;
+color: #4a5e35;
+font-family: ‘EB Garamond’, serif;
+font-size: 0.82rem;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+cursor: pointer;
+transition: background 0.22s, color 0.22s;
+}
+
+.submit-btn:hover {
+background: #6b8c4f;
+color: #fdfaf4;
+}
+
+.success {
+display: none;
+text-align: center;
+padding: 20px 0 8px;
+font-family: ‘Pinyon Script’, cursive;
+color: #6b8c4f;
+font-size: 1.7rem;
+animation: fadeIn 0.6s ease both;
+}
+
+.success-sub {
+display: none;
+text-align: center;
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 0.95rem;
+color: #6b8c4f;
+font-style: italic;
+margin-top: 4px;
+animation: fadeIn 0.8s ease 0.2s both;
+}
+</style>
+
+</head>
+<body>
+<div class="card">
+  <div class="header-script">The favour of a reply is requested<br>by the fifteenth of July</div>
+
+  <div class="name-line">
+    <span class="name-m">M</span>
+    <input class="name-input" type="text" placeholder="Name(s)" id="guestName">
+  </div>
+
+  <!-- Welcome Party -->
+
+  <div class="event-section">
+    <div class="event-title">Welcome Party</div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="wp-accepts" onchange="togglePersons('wp', 'accepts')">
+        <span class="custom-check"></span>
+        Accepts with pleasure for
+      </label>
+      <input class="persons-input" type="number" id="wp-persons" min="1" max="20" placeholder="__">
+      <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:0.13em;text-transform:uppercase;color:#4a5e35;">persons</span>
+    </div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="wp-regrets" onchange="togglePersons('wp', 'regrets')">
+        <span class="custom-check"></span>
+        Kindly Regrets
+      </label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Wedding Ceremony -->
+
+  <div class="event-section">
+    <div class="event-title">The Wedding Ceremony and Reception</div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="wc-accepts" onchange="togglePersons('wc', 'accepts')">
+        <span class="custom-check"></span>
+        Accepts with pleasure for
+      </label>
+      <input class="persons-input" type="number" id="wc-persons" min="1" max="20" placeholder="__">
+      <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:0.13em;text-transform:uppercase;color:#4a5e35;">persons</span>
+    </div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="wc-regrets" onchange="togglePersons('wc', 'regrets')">
+        <span class="custom-check"></span>
+        Kindly Regrets
+      </label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Farewell Brunch -->
+
+  <div class="event-section">
+    <div class="event-title">Farewell Brunch</div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="fb-accepts" onchange="togglePersons('fb', 'accepts')">
+        <span class="custom-check"></span>
+        Accepts with pleasure for
+      </label>
+      <input class="persons-input" type="number" id="fb-persons" min="1" max="20" placeholder="__">
+      <span style="font-family:'EB Garamond',serif;font-size:0.78rem;letter-spacing:0.13em;text-transform:uppercase;color:#4a5e35;">persons</span>
+    </div>
+    <div class="rsvp-row">
+      <label>
+        <input type="checkbox" id="fb-regrets" onchange="togglePersons('fb', 'regrets')">
+        <span class="custom-check"></span>
+        Kindly Regrets
+      </label>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+<span class="accommodations-label">Kindly list your accommodations:</span>
+<input class="accommodations-input" type="text" id="accommodations" placeholder="Hotel name, reservation details…">
+
+<button class="submit-btn" onclick="submitRsvp()">Send Reply</button>
+
+  <div class="success" id="success">With grateful thanks for your reply</div>
+  <div class="success-sub" id="success-sub">We look forward to celebrating with you.</div>
+</div>
+
+<script>
+  function togglePersons(event, choice) {
+    const accepts = document.getElementById(event + '-accepts');
+    const regrets = document.getElementById(event + '-regrets');
+    const persons = document.getElementById(event + '-persons');
+
+    if (choice === 'accepts' && accepts.checked) {
+      regrets.checked = false;
+      persons.style.opacity = '1';
+      persons.disabled = false;
+    } else if (choice === 'regrets' && regrets.checked) {
+      accepts.checked = false;
+      persons.style.opacity = '0.3';
+      persons.disabled = true;
+      persons.value = '';
+    } else {
+      persons.style.opacity = '1';
+      persons.disabled = false;
+    }
+  }
+
+  const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxEx242sD2tqCwfnYwPquHwY1YnzEqLFsg1fSyo7nEBt5on0Fq33Cvsah6WhKvbS2R26Q/exec';
+
+  async function submitRsvp() {
+    const name = document.getElementById('guestName').value.trim();
+    if (!name) {
+      document.getElementById('guestName').focus();
+      document.getElementById('guestName').style.borderColor = '#c47a5a';
+      setTimeout(() => document.getElementById('guestName').style.borderColor = '', 1500);
+      return;
+    }
+
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const payload = {
+      name,
+      welcomeParty:    document.getElementById('wp-accepts').checked ? 'Accepts' : document.getElementById('wp-regrets').checked ? 'Regrets' : '',
+      welcomePersons:  document.getElementById('wp-persons').value || '',
+      wedding:         document.getElementById('wc-accepts').checked ? 'Accepts' : document.getElementById('wc-regrets').checked ? 'Regrets' : '',
+      weddingPersons:  document.getElementById('wc-persons').value || '',
+      farewellBrunch:  document.getElementById('fb-accepts').checked ? 'Accepts' : document.getElementById('fb-regrets').checked ? 'Regrets' : '',
+      farewellPersons: document.getElementById('fb-persons').value || '',
+      accommodations:  document.getElementById('accommodations').value.trim()
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.error('Submission error:', err);
+    }
+
+    btn.style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    document.getElementById('success-sub').style.display = 'block';
+  }
+
+  // init disabled state
+  ['wp','wc','fb'].forEach(e => {
+    document.getElementById(e+'-persons').style.opacity = '1';
+  });
+</script>
+
+</body>
+</html>
